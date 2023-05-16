@@ -1,5 +1,6 @@
 <script setup>
 import store from '../storage/index'
+import { ref } from 'vue'
 // let count = store.state.count
 
 const incre = () => {
@@ -8,6 +9,30 @@ const incre = () => {
 const decre = () => {
   store.commit('decrement')
 }
+
+let skills = ref(['Vue.js', 'React.js', 'Angular.js'])
+const newSkill = ref('')
+
+const handleSkillChange = (value) => {
+  newSkill.value = value
+}
+
+const addSkill = () => {
+  const skill = newSkill.value
+  skills.value.push(skill)
+  newSkill.value = ''
+}
+
+const deleteSkill = (i) => {
+  skills.value.splice(i, 1)
+}
+
+const boxToggle = ref(true)
+
+const toggle = () => {
+  boxToggle.value = !boxToggle.value
+}
+console.log(boxToggle.value)
 </script>
 
 <template>
@@ -20,11 +45,37 @@ const decre = () => {
         <button @click="decre">-</button>
         <button @click="incre">+</button>
       </div>
+
+      <div class="">
+        <input
+          type="text"
+          placeholder="Enter a skill"
+          :value="newSkill"
+          @input="handleSkillChange($event.target.value)"
+        />
+        <button @click="addSkill">Add</button>
+        <br />
+        <ol>
+          <li v-for="(skill, i) of skills" :key="skill">
+            {{ skill }}
+            <button @click="deleteSkill(i)">x</button>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <button @click="toggle">Toggle</button>
+        <div class="box" v-if="boxToggle"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
+.box {
+  height: 4rem;
+  width: 4rem;
+  background-color: aqua;
+}
 .name {
   font-weight: bold;
 }
