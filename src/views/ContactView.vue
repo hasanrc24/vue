@@ -32,7 +32,6 @@ const boxToggle = ref(true)
 const toggle = () => {
   boxToggle.value = !boxToggle.value
 }
-console.log(boxToggle.value)
 </script>
 
 <template>
