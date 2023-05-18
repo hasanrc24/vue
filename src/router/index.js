@@ -22,7 +22,16 @@ const router = createRouter({
       name: 'contact',
       component: () => import('../views/ContactView.vue')
     },
-    { path: '/card', name: 'card', component: () => import('../views/CardView.vue') }
+    {
+      path: '/card',
+      name: 'card',
+      component: () => import('../views/CardView.vue')
+    },
+    {
+      path: '/konva',
+      name: 'konva',
+      component: () => import('../views/KonvaView.vue')
+    }
   ]
 })
 
